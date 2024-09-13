@@ -5,11 +5,56 @@
     margin-bottom: 20px;
 }
 
+#bottom-controls-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+#bottom-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    position: relative; /* Add this to create a positioning context */
+}
+
+#quick-nav-container {
+    display: flex;
+    justify-content: center;
+}
+
 #quick-nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+}
+
+#anki-mode-container {
+    position: absolute;
+    left: 100%; /* Position it just after the #bottom-controls */
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 10px; /* Add 10px margin to the left of the anki-mode container */
+}
+
+#anki-mode-control {
+    display: flex;
+    align-items: center;
+}
+
+/* Ensure the small buttons have consistent sizing */
+.small-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin: 0 5px; /* Add some margin between buttons */
+}
+
+/* Style for the shuffle control to align with buttons */
+#shuffle-control {
+    margin: 0 5px;
 }
 
 #nav-buttons {

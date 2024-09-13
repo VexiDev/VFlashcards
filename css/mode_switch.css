@@ -38,3 +38,72 @@
 .mode-switch .switch-option.active {
     color: var(--bg-color);
 }
+
+/* AnkiMode Checkbox Styles */
+#anki-mode-control {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 20px; /* Add margin to push it to the right */
+    margin-top: 9px; /* Move the anki controls down a little */
+}
+
+.anki-mode-switch {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.anki-checkmark {
+    width: 20px;
+    height: 20px;
+    background-color: var(--input-bg);
+    border: 2px solid var(--accent-color);
+    border-radius: 4px;
+    position: relative;
+    overflow: visible;
+}
+
+.anki-mode-switch input {
+    display: none;
+}
+
+.anki-mode-switch input:checked + .anki-checkmark::after {
+    content: '✓';
+    position: absolute;
+    top: -5px;
+    left: 2px;
+    color: var(--accent-color);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.anki-label {
+    margin-left: 5px;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.alpha-tag {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    font-size: 10px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    margin-right: 5px; /* Changed from margin-left to margin-right */
+    text-transform: uppercase;
+}
+
+/* New styles for bottom controls */
+#bottom-controls {
+    display: flex;
+    justify-content: center; /* Center the contents */
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+#quick-nav {
+    display: flex;
+    align-items: center;
+}

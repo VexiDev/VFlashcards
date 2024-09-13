@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Meta tags and title -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VFlashcards 1.0</title>
-    
+
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/variables.css">
     <link rel="stylesheet" href="css/base.css">
@@ -20,12 +21,13 @@
     <link rel="stylesheet" href="css/controls.css">
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/mode_switch.css">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <!-- Main content -->
     <div id="main-content">
@@ -73,15 +75,31 @@
                     <button id="prev-button">Previous</button>
                     <button id="next-button">Next</button>
                 </div>
-                <div id="quick-nav">
-                    <button class="small-button" id="first-card-button">First</button>
-                    <div id="shuffle-control">
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="shuffle-toggle">
-                            <span class="slider"></span>
-                        </label>
+                <div id="bottom-controls-container">
+                    <div id="bottom-controls">
+                        <div id="quick-nav-container">
+                            <div id="quick-nav">
+                                <button class="small-button" id="first-card-button">First</button>
+                                <div id="shuffle-control">
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" id="shuffle-toggle">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <button class="small-button" id="last-card-button">Last</button>
+                            </div>
+                        </div>
                     </div>
-                    <button class="small-button" id="last-card-button">Last</button>
+                    <div id="anki-mode-container">
+                        <div id="anki-mode-control">
+                            <label class="anki-mode-switch">
+                                <span class="alpha-tag">alpha</span>
+                                <input type="checkbox" id="anki-mode-toggle">
+                                <span class="anki-checkmark"></span>
+                                <span class="anki-label">AnkiMode</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -157,4 +175,5 @@
     <script src="js/loader.js"></script>
     <script src="js/app.js"></script> <!-- Load app.js after all other scripts -->
 </body>
+
 </html>
