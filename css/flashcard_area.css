@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 10px;
+    padding: 0; /* Adjust as needed */
     overflow-y: auto;
     box-sizing: border-box;
     width: 100%;
@@ -121,4 +121,39 @@
 
 #flashcard-container.review-mode .flashcard p {
     font-size: 3vmin;
+}
+
+#input-container-wrapper {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    max-height: 200px; /* Adjust this value based on your content */
+    opacity: 1;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+#input-container-wrapper.hidden {
+    max-height: 0;
+    opacity: 0;
+}
+
+#anki-mode-control {
+    margin: 0; /* Adjust as needed */
+    padding: 0; /* Adjust as needed */
+    text-align: center;
+}
+
+#mode-controls {
+    margin: 0; /* Adjust as needed */
+    padding: 0; /* Adjust as needed */
+    margin-top: 5px;
+}
+
+#input-container {
+    padding: 10px 0;
+}
+
+#current-deck-name {
+    margin: 0; /* Adjust as needed */
+    padding: 5px 0;
+    margin-bottom: 5px;
 }

@@ -32,17 +32,17 @@ function changeMode(newMode) {
     const deckControls = document.getElementById('deck-controls');
     const deckControlsButtons = document.getElementById('deck-controls-header');
     const flashcardArea = document.getElementById('flashcard-area');
-    const inputContainer = document.getElementById('input-container');
+    const inputContainerWrapper = document.getElementById('input-container-wrapper');
     const controls = document.getElementById('controls');
     const flashcardContainer = document.getElementById('flashcard-container');
 
     if (mode.startsWith('study')) {
         deckControls.classList.add('hidden');
         deckControlsButtons.classList.add('hidden');
+        inputContainerWrapper.classList.add('hidden');
         
         requestAnimationFrame(() => {
             flashcardArea.classList.add('full-width');
-            inputContainer.classList.add('full-width');
             controls.classList.add('full-width');
             flashcardContainer.classList.add('full-width');
         });
@@ -63,6 +63,7 @@ function changeMode(newMode) {
     } else {
         deckControls.style.display = 'block';
         deckControlsButtons.style.display = 'block';
+        inputContainerWrapper.classList.remove('hidden');
         
         setTimeout(() => {
             deckControls.classList.remove('hidden');
@@ -70,7 +71,6 @@ function changeMode(newMode) {
         }, 10);
 
         flashcardArea.classList.remove('full-width');
-        inputContainer.classList.remove('full-width');
         controls.classList.remove('full-width');
         flashcardContainer.classList.remove('full-width');
         

@@ -10,7 +10,8 @@
 
 #input-container input {
     width: 80%;
-    max-width: 400px;
+    max-width: 600px;
+    min-width: 300px; /* Add this line to set a minimum width */
 }
 
 input[type="text"],

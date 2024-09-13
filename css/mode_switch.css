@@ -12,7 +12,7 @@
     position: relative;
     width: 450px;
     height: 40px;
-    margin: 10px auto;
+    margin: 0 auto;
 }
 
 .mode-switch .switch-option {
@@ -43,9 +43,8 @@
 #anki-mode-control {
     display: flex;
     align-items: center;
-    height: 100%;
-    margin-left: 20px; /* Add margin to push it to the right */
-    margin-top: 9px; /* Move the anki controls down a little */
+    height: auto; /* Adjust height as needed */
+    margin: 0; /* Adjust margin as needed */
 }
 
 .anki-mode-switch {

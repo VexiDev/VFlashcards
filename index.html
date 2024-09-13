@@ -46,6 +46,14 @@
         <!-- Flashcard Area -->
         <div id="flashcard-area">
             <h2 id="current-deck-name" style="text-align: center;">Deck Name</h2>
+            <div id="anki-mode-control">
+                <label class="anki-mode-switch">
+                    <span class="alpha-tag">alpha</span>
+                    <input type="checkbox" id="anki-mode-toggle">
+                    <span class="anki-checkmark"></span>
+                    <span class="anki-label">AnkiMode</span>
+                </label>
+            </div>
 
             <!-- Mode Controls -->
             <div id="mode-controls">
@@ -58,11 +66,13 @@
             </div>
 
             <!-- Input Container -->
-            <div id="input-container">
-                <input type="text" id="side1-input" placeholder="Side 1">
-                <input type="text" id="side2-input" placeholder="Side 2">
-                <button id="add-button">Add Card</button>
-                <span id="error-message"></span>
+            <div id="input-container-wrapper">
+                <div id="input-container">
+                    <input type="text" id="side1-input" placeholder="Side 1">
+                    <input type="text" id="side2-input" placeholder="Side 2">
+                    <button id="add-button">Add Card</button>
+                    <span id="error-message"></span>
+                </div>
             </div>
 
             <!-- Flashcard Container -->
@@ -88,16 +98,6 @@
                                 </div>
                                 <button class="small-button" id="last-card-button">Last</button>
                             </div>
-                        </div>
-                    </div>
-                    <div id="anki-mode-container">
-                        <div id="anki-mode-control">
-                            <label class="anki-mode-switch">
-                                <span class="alpha-tag">alpha</span>
-                                <input type="checkbox" id="anki-mode-toggle">
-                                <span class="anki-checkmark"></span>
-                                <span class="anki-label">AnkiMode</span>
-                            </label>
                         </div>
                     </div>
                 </div>
