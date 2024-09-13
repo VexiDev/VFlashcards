@@ -33,6 +33,10 @@ function addEventListeners() {
         updateControls();
         await saveDeckToFile(currentDeckName, cards);
     });
+    document.getElementById('again-button').addEventListener('click', again);
+    document.getElementById('hard-button').addEventListener('click', hard);
+    document.getElementById('good-button').addEventListener('click', good);
+    document.getElementById('easy-button').addEventListener('click', easy);
     document.querySelectorAll('.close').forEach(button => {
         button.addEventListener('click', () => {
             closeModal(button.getAttribute('data-modal'));

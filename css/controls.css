@@ -80,11 +80,26 @@
 #anki-controls button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: var(--accent-color);
     color: var(--bg-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#again-button {
+    background-color: #b7b7b7;
+}
+
+#hard-button {
+    background-color: #bf3b3b;
+}
+
+#good-button {
+    background-color: #407e27;
+}
+
+#easy-button {
+    background-color: var(--accent-color);
 }
 
 #anki-controls button:disabled {

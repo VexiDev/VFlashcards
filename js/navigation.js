@@ -1,12 +1,52 @@
 // js/navigation.js
 
 function handleKeyPress(event) {
-    if (event.code === 'ArrowLeft') {
+    const { code } = event;
+
+    if (mode.startsWith('review')) {
+        handleReviewModeKeyPress(code);
+    } else if (mode.startsWith('study')) {
+        handleStudyModeKeyPress(code);
+    }
+}
+
+function handleReviewModeKeyPress(code) {
+    if (code === 'ArrowLeft') {
         prevCard();
-    } else if (event.code === 'ArrowRight') {
+    } else if (code === 'ArrowRight') {
         nextCard();
-    } else if (event.code === 'Space' && mode.startsWith('study')) {
+    }
+}
+
+function handleStudyModeKeyPress(code) {
+    if (ankiMode) {
+        handleAnkiModeKeyPress(code);
+    } else {
+        if (code === 'ArrowLeft') {
+            prevCard();
+        } else if (code === 'ArrowRight') {
+            nextCard();
+        }
+    }
+    if (code === 'Space') {
         flipCard();
+    }
+}
+
+function handleAnkiModeKeyPress(code) {
+    switch (code) {
+        case '1':
+            again();
+            break;
+        case '2':
+            hard();
+            break;
+        case '3':
+            good();
+            break;
+        case '4':
+            easy();
+            break;
     }
 }
 
