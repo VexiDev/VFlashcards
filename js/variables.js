@@ -16,3 +16,4 @@ window.shuffledDeck = [];
 window.seenCards = new Set();
 window.viewedCards = [];
 window.isRenaming = false;
+window.ankiMode = false;

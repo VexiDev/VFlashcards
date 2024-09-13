@@ -2,11 +2,14 @@
 
 function initializeAppMode() {
     const flashcardContainer = document.getElementById('flashcard-container');
+    const ankiModeToggle = document.getElementById('anki-mode-toggle');
+    ankiMode = ankiModeToggle.checked;
     if (mode === 'review') {
         flashcardContainer.classList.add('review-mode');
     } else {
         flashcardContainer.classList.remove('review-mode');
     }
+    updateControls();
 }
 
 function initModeSwitch() {
@@ -76,6 +79,30 @@ function changeMode(newMode) {
         
         flashcardContainer.classList.add('review-mode');
     }
-
+    updateControls();
     showCard();
+}
+
+function updateControls() {
+    const ankiModeToggle = document.getElementById('anki-mode-toggle');
+    const navButtons = document.getElementById('nav-buttons');
+    const bottomControls = document.getElementById('bottom-controls');
+    const ankiControls = document.getElementById('anki-controls');
+    const shuffleControl = document.getElementById('shuffle-control');
+
+    if (ankiModeToggle.checked && mode.startsWith('study')) {
+        navButtons.style.display = 'none';
+        bottomControls.style.display = 'none';
+        ankiControls.style.display = 'flex';
+    } else {
+        navButtons.style.display = 'flex';
+        bottomControls.style.display = 'flex';
+        ankiControls.style.display = 'none';
+    }
+
+    if (ankiModeToggle.checked && mode === 'review') {
+        shuffleControl.style.display = 'none';
+    } else {
+        shuffleControl.style.display = 'block';
+    }
 }

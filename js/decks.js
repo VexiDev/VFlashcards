@@ -18,7 +18,9 @@ async function loadDecks() {
 
 async function loadDeck(deckName) {
     currentDeckName = deckName;
-    cards = await window.electronAPI.readDeck(deckName);
+    const deckData = await window.electronAPI.readDeck(deckName);
+    cards = Array.isArray(deckData.cards) ? deckData.cards : [];
+    ankiMode = deckData.ankiMode || false; // Load ankiMode from the deck data
     cards.forEach((card, index) => {
         if (card.originalIndex === undefined) {
             card.originalIndex = index;
@@ -35,6 +37,8 @@ async function loadDeck(deckName) {
     if (manageDecksModal.style.display === 'block') {
         updateDeckList();
     }
+    document.getElementById('anki-mode-toggle').checked = ankiMode; // Update the toggle state
+    updateControls(); // Ensure controls are updated based on ankiMode
 }
 
 async function createNewDeck() {

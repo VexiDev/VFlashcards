@@ -28,6 +28,11 @@ function addEventListeners() {
     document.getElementById('shuffle-toggle').addEventListener('change', toggleShuffle);
     document.getElementById('side1-input').addEventListener('input', validateInput);
     document.getElementById('side2-input').addEventListener('input', validateInput);
+    document.getElementById('anki-mode-toggle').addEventListener('change', async () => {
+        ankiMode = document.getElementById('anki-mode-toggle').checked;
+        updateControls();
+        await saveDeckToFile(currentDeckName, cards);
+    });
     document.querySelectorAll('.close').forEach(button => {
         button.addEventListener('click', () => {
             closeModal(button.getAttribute('data-modal'));
@@ -45,10 +50,6 @@ window.addEventListener('load', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Other initialization code...
-    
     initModeSwitch();
     initializeAppMode();
-    
-    // More initialization code...
 });

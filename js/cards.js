@@ -187,5 +187,15 @@ function confirmRemove(index) {
 }
 
 function getEnabledCards() {
-    return cards.filter(card => card.enabled);
+    return Array.isArray(cards) ? cards.filter(card => card.enabled) : [];
+}
+
+async function saveDeckToFile(deckName, deckData) {
+    const ankiModeState = document.getElementById('anki-mode-toggle').checked;
+    const dataToSave = {
+        cards: deckData,
+        ankiMode: ankiModeState
+    };
+    await window.electronAPI.writeDeck(deckName, dataToSave);
+    showSavingIndicator();
 }

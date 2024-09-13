@@ -70,4 +70,26 @@
     font-size: 18px;
 }
 
+#anki-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#anki-controls button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#anki-controls button:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+}
+
 
