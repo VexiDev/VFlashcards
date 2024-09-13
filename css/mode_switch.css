@@ -1,0 +1,40 @@
+#mode-controls {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.mode-switch {
+    display: flex;
+    background-color: var(--input-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    width: 450px;
+    height: 40px;
+    margin: 10px auto;
+}
+
+.mode-switch .switch-option {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+
+.mode-switch .switch-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 33.33%;
+    height: 100%;
+    background-color: var(--accent-color);
+    transition: transform 0.3s ease;
+}
+
+.mode-switch .switch-option.active {
+    color: var(--bg-color);
+}

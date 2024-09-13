@@ -1,0 +1,19 @@
+button {
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    font-weight: bold;
+    border: none; /* Remove borders */
+    border-radius: 5px; /* Add rounded corners */
+}
+
+button:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+}
+
+.small-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    margin: 0 10px;
+}

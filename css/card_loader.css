@@ -1,0 +1,28 @@
+.card-stack-container {
+    --card-width: 100px;
+    --card-height: 140px;
+    --card-color: #D3D3D3;
+    --accent-card-color: #9EC2AA;
+    --outline-color: #4D4D4D;
+    position: relative;
+    left: calc(var(--card-width) / 2);
+    width: calc(var(--card-width) * 2.5);
+    height: calc(var(--card-height) * 1.5);
+    perspective: 1000px;
+    transform: rotate(0deg);
+}
+
+.card-stack-container .card {
+    position: absolute;
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: 10px;
+    background-color: var(--card-color);
+    border: 3px solid var(--outline-color);
+    transform-origin: bottom left;
+    transition: transform 0.5s, z-index 0.5s;
+}
+
+.card-stack-container .card:nth-child(3) {
+    background-color: var(--accent-card-color);
+}

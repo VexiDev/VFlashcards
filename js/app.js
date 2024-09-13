@@ -1,0 +1,54 @@
+// js/app.js
+
+async function initializeApp() {
+    await loadDecks();
+    const lastUsedDeck = localStorage.getItem('lastUsedDeck');
+    if (lastUsedDeck && decks[lastUsedDeck]) {
+        await loadDeck(lastUsedDeck);
+    } else {
+        const firstDeckName = Object.keys(decks)[0];
+        if (firstDeckName) {
+            await loadDeck(firstDeckName);
+        } else {
+            await createNewDeck();
+        }
+    }
+    document.addEventListener('keydown', handleKeyPress);
+    addEventListeners();
+}
+
+function addEventListeners() {
+    document.getElementById('add-button').addEventListener('click', addCards);
+    document.getElementById('manage-decks-btn').addEventListener('click', openManageDecksModal);
+    document.getElementById('new-deck-btn').addEventListener('click', createNewDeck);
+    document.getElementById('prev-button').addEventListener('click', prevCard);
+    document.getElementById('next-button').addEventListener('click', nextCard);
+    document.getElementById('first-card-button').addEventListener('click', firstCard);
+    document.getElementById('last-card-button').addEventListener('click', lastCard);
+    document.getElementById('shuffle-toggle').addEventListener('change', toggleShuffle);
+    document.getElementById('side1-input').addEventListener('input', validateInput);
+    document.getElementById('side2-input').addEventListener('input', validateInput);
+    document.querySelectorAll('.close').forEach(button => {
+        button.addEventListener('click', () => {
+            closeModal(button.getAttribute('data-modal'));
+        });
+    });
+    document.getElementById('confirm-edit-button').addEventListener('click', confirmEdit);
+    document.getElementById('confirm-remove-button').addEventListener('click', () => {
+        confirmRemove(editingIndex);
+    });
+}
+
+window.addEventListener('load', () => {
+    initializeApp();
+    initModeSwitch();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Other initialization code...
+    
+    initModeSwitch();
+    initializeAppMode();
+    
+    // More initialization code...
+});

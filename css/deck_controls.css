@@ -1,0 +1,48 @@
+#main-content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+}
+
+#deck-controls {
+    position: relative;
+    width: 250px;
+    padding: 10px;
+    overflow-y: auto;
+    flex-shrink: 0;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0);
+}
+
+#deck-controls.hidden {
+    position: absolute;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    width: 250px; 
+}
+
+#deck-controls-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    z-index: 1000;
+    transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+#deck-controls-header.hidden {
+    position: absolute;
+    transform: translateX(+100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+#deck-controls-header button {
+    margin-right: 10px;
+}

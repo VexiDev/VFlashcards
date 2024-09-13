@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags and title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFlashcards 1.0</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/card_loader.css">
+    <!-- Include feature-specific CSS files -->
+    <link rel="stylesheet" href="css/deck_controls.css">
+    <link rel="stylesheet" href="css/card_list.css">
+    <link rel="stylesheet" href="css/flashcard_area.css">
+    <link rel="stylesheet" href="css/input_container.css">
+    <link rel="stylesheet" href="css/controls.css">
+    <link rel="stylesheet" href="css/modals.css">
+    <link rel="stylesheet" href="css/mode_switch.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Main content -->
+    <div id="main-content">
+        <!-- Deck Controls Header -->
+        <div id="deck-controls-header">
+            <button id="manage-decks-btn">Manage Decks</button>
+            <button id="new-deck-btn">New Deck</button>
+        </div>
+        <!-- Deck Controls -->
+        <div id="deck-controls">
+            <div id="card-list"></div>
+            <div class="custom-scrollbar" id="custom-scrollbar">
+                <div class="custom-scrollbar-thumb" id="custom-scrollbar-thumb"></div>
+            </div>
+        </div>
+        <!-- Flashcard Area -->
+        <div id="flashcard-area">
+            <h2 id="current-deck-name" style="text-align: center;">Deck Name</h2>
+
+            <!-- Mode Controls -->
+            <div id="mode-controls">
+                <div class="mode-switch">
+                    <div class="switch-highlight"></div>
+                    <div class="switch-option active" data-mode="review">Review</div>
+                    <div class="switch-option" data-mode="study-side2">Study Side 1</div>
+                    <div class="switch-option" data-mode="study-side1">Study Side 2</div>
+                </div>
+            </div>
+
+            <!-- Input Container -->
+            <div id="input-container">
+                <input type="text" id="side1-input" placeholder="Side 1">
+                <input type="text" id="side2-input" placeholder="Side 2">
+                <button id="add-button">Add Card</button>
+                <span id="error-message"></span>
+            </div>
+
+            <!-- Flashcard Container -->
+            <div id="flashcard-container"></div>
+
+            <!-- Controls -->
+            <div id="controls">
+                <div id="saving-indicator"></div>
+                <div id="nav-buttons">
+                    <button id="prev-button">Previous</button>
+                    <button id="next-button">Next</button>
+                </div>
+                <div id="quick-nav">
+                    <button class="small-button" id="first-card-button">First</button>
+                    <div id="shuffle-control">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="shuffle-toggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                    <button class="small-button" id="last-card-button">Last</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Card</h2>
+                <span class="close" data-modal="editModal">&times;</span>
+            </div>
+            <div class="edit-inputs">
+                <input type="text" id="edit-side1-input" placeholder="Edit Side 1">
+                <input type="text" id="edit-side2-input" placeholder="Edit Side 2">
+            </div>
+            <div class="edit-buttons">
+                <button id="confirm-edit-button">Save</button>
+                <button id="confirm-remove-button" class="delete-button">Delete</button>
+            </div>
+        </div>
+    </div>
+    <!-- Confirm Modal -->
+    <div id="confirmModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Confirm Action</h2>
+                <span class="close" data-modal="confirmModal">&times;</span>
+            </div>
+            <div class="confirm-message-container">
+                <p id="confirm-message"></p>
+            </div>
+            <div class="confirm-buttons">
+                <button id="confirmAction" class="delete-button">Confirm</button>
+                <button id="cancelAction" class="save-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+    <!-- Manage Decks Modal -->
+    <div id="manageDecksModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Manage Decks</h2>
+                <span class="close" data-modal="manageDecksModal">&times;</span>
+            </div>
+            <div id="deck-list"></div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="card-stack-container">
+            <div class="card"></div>
+            <div class="card"></div>
+            <div class="card"></div>
+        </div>
+        <div id="loading-message">Reading your decks...</div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Include feature-specific JavaScript files -->
+    <script src="js/variables.js"></script>
+    <script src="js/decks.js"></script>
+    <script src="js/cards.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/mode_switch.js"></script>
+    <script src="js/shuffle.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/app.js"></script> <!-- Load app.js after all other scripts -->
+</body>
+</html>

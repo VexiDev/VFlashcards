@@ -1,0 +1,124 @@
+#card-list {
+    padding-right: 12px;
+    max-height: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+    scrollbar-color: var(--accent-color) transparent;
+}
+
+#card-list::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+
+#card-list::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+#card-list::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 10px;
+}
+
+/* For Internet Explorer */
+#card-list {
+    -ms-overflow-style: none;
+}
+
+.card-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: var(--card-bg);
+    border-radius: 5px;
+}
+
+.card-item.selected {
+    border: 2px solid var(--accent-color);
+}
+
+.card-item.disabled {
+    opacity: 0.5;
+}
+
+.left-controls {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.card-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.card-item.disabled .card-content {
+    cursor: default;
+    opacity: 0.5;
+}
+
+.card-item.disabled .card-content:hover {
+    background-color: inherit;
+}
+
+.card-content span {
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.toggle-switch {
+    position: relative;
+    margin-left: 5px;
+    margin-right: 10px;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--disabled-color);
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--accent-color);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
