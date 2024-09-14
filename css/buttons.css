@@ -5,6 +5,7 @@ button {
     font-weight: bold;
     border: none; /* Remove borders */
     border-radius: 5px; /* Add rounded corners */
+    user-select: none; /* Prevent text selection */
 }
 
 button:disabled {

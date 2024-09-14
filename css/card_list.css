@@ -32,7 +32,10 @@
     padding: 10px;
     margin-bottom: 10px;
     background-color: var(--card-bg);
-    border-radius: 5px;
+    border-radius: 10px; /* Ensure the card has rounded corners */
+    overflow: hidden; /* Prevent the bar from overflowing */
+    position: relative; /* Ensure the bar is positioned correctly */
+    height: 100%; /* Ensure the bar fills the card item */
 }
 
 .card-item.selected {
@@ -121,4 +124,21 @@ input:checked+.slider {
 
 input:checked+.slider:before {
     transform: translateX(20px);
+}
+
+
+.learning-stage-bar {
+    width: 10px; /* Match the width of the rounded corner */
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-top-left-radius: 10px; /* Match the card's rounded corners */
+    border-bottom-left-radius: 10px; /* Match the card's rounded corners */
+}
+
+.card-content-wrapper {
+    display: flex;
+    flex-grow: 1;
+    padding-left: 10px; /* Add padding to avoid overlap with the bar */
 }

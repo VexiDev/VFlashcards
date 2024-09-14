@@ -17,3 +17,4 @@ window.seenCards = new Set();
 window.viewedCards = [];
 window.isRenaming = false;
 window.ankiMode = false;
+window.studyStep = 0; // Added studyStep

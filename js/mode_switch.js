@@ -10,6 +10,7 @@ function initializeAppMode() {
         flashcardContainer.classList.remove('review-mode');
     }
     updateControls();
+    updateCardList(); // Refresh the card list when Anki mode is toggled
 }
 
 function initModeSwitch() {
@@ -59,10 +60,14 @@ function changeMode(newMode) {
         
         if (shuffleEnabled) {
             initializeShuffledDeck();
-            showRandomCard();
         } else {
             firstCard();
         }
+
+        // Delay the card animation until the input hiding animation is done
+        setTimeout(() => {
+            animateCards();
+        }, 300);
     } else {
         deckControls.style.display = 'block';
         deckControlsButtons.style.display = 'block';
@@ -81,6 +86,17 @@ function changeMode(newMode) {
     }
     updateControls();
     showCard();
+}
+
+function animateCards() {
+    const flashcardContainer = document.getElementById('flashcard-container');
+    const flashcards = flashcardContainer.querySelectorAll('.flashcard');
+    flashcards.forEach(card => {
+        card.classList.add('animate');
+        card.addEventListener('animationend', () => {
+            card.classList.remove('animate');
+        }, { once: true });
+    });
 }
 
 function updateControls() {

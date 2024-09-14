@@ -6,7 +6,7 @@ function handleKeyPress(event) {
     if (mode.startsWith('review')) {
         handleReviewModeKeyPress(code);
     } else if (mode.startsWith('study')) {
-        handleStudyModeKeyPress(code);
+        handleStudyModeKeyPress(code, event);
     }
 }
 
@@ -18,7 +18,7 @@ function handleReviewModeKeyPress(code) {
     }
 }
 
-function handleStudyModeKeyPress(code) {
+function handleStudyModeKeyPress(code, event) {
     if (ankiMode) {
         handleAnkiModeKeyPress(code);
     } else {
@@ -29,6 +29,7 @@ function handleStudyModeKeyPress(code) {
         }
     }
     if (code === 'Space') {
+        event.preventDefault();
         flipCard();
     }
 }
@@ -64,9 +65,20 @@ function prevCard() {
 }
 
 function nextCard() {
+    studyStep++;
     const enabledCards = getEnabledCards();
     if (enabledCards.length > 0) {
-        if (mode.startsWith('study') && shuffleEnabled) {
+        if (ankiMode && mode.startsWith('study')) {
+            const dueCards = enabledCards.filter(card => card.nextReview <= studyStep);
+            if (dueCards.length > 0) {
+                dueCards.sort((a, b) => a.nextReview - b.nextReview);
+                currentIndex = cards.indexOf(dueCards[0]);
+            } else {
+                // Optionally, you can handle no due cards differently
+                currentIndex = cards.indexOf(enabledCards[0]);
+            }
+            saveDeckToFile(currentDeckName, getCurrentDeckData());
+        } else if (mode.startsWith('study') && shuffleEnabled) {
             if (shuffledDeck.length === 0) {
                 initializeShuffledDeck();
             }
@@ -81,8 +93,8 @@ function nextCard() {
             } else {
                 currentIndex = cards.indexOf(enabledCards[0]);
             }
-            showCard(true);
         }
+        showCard(true);
     }
 }
 

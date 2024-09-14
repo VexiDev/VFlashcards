@@ -1,34 +1,33 @@
-function again() {
-    console.log("Again button pressed");
+function again(event) {
+    event.preventDefault();
+    updateCardGrade(1);
+    nextCard();
+    event.target.blur();
 }
 
-function hard() {
-    console.log("Hard button pressed");
+function hard(event) {
+    event.preventDefault();
+    updateCardGrade(2);
+    nextCard();
+    event.target.blur();
 }
 
-function good() {
-    console.log("Good button pressed");
+function good(event) {
+    event.preventDefault();
+    updateCardGrade(3);
+    nextCard();
+    event.target.blur();
 }
 
-function easy() {
-    console.log("Easy button pressed");
+function easy(event) {
+    event.preventDefault();
+    updateCardGrade(4);
+    nextCard();
+    event.target.blur();
 }
 
-document.addEventListener('keydown', (event) => {
-    if (!ankiMode || !mode.startsWith('study')) return;
-
-    switch (event.key) {
-        case '1':
-            again();
-            break;
-        case '2':
-            hard();
-            break;
-        case '3':
-            good();
-            break;
-        case '4':
-            easy();
-            break;
-    }
-});
+function updateCardGrade(grade) {
+    const card = cards[currentIndex];
+    updateCardState(card, grade, 'sm2', studyStep);
+    saveDeckToFile(currentDeckName, getCurrentDeckData());
+}

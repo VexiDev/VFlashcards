@@ -29,7 +29,11 @@ async function addCards() {
             side1: side1Items[i].trim(),
             side2: side2Items[i].trim(),
             enabled: true,
-            originalIndex: cards.length + i
+            originalIndex: cards.length + i,
+            repetitions: 0,
+            interval: 1,
+            easeFactor: 2.5,
+            nextReview: studyStep // Make new cards due immediately
         });
     }
 
@@ -40,7 +44,7 @@ async function addCards() {
     updateCardList();
     showCard();
     validateInput();
-    await saveDeckToFile(currentDeckName, cards);
+    await saveDeckToFile(currentDeckName, getCurrentDeckData());
 }
 
 function validateInput() {
@@ -67,28 +71,50 @@ function validateInput() {
     }
 }
 
-
 function updateCardList(shouldScroll = true) {
     const cardList = document.getElementById('card-list');
     cardList.innerHTML = '';
-    cards.sort((a, b) => a.originalIndex - b.originalIndex);
+
+    // Sort cards by learning stage if Anki mode is on and in review mode
+    if (ankiMode && mode === 'review') {
+        cards.sort((a, b) => {
+            const stageA = getLearningStage(a.easeFactor);
+            const stageB = getLearningStage(b.easeFactor);
+            return stageA.localeCompare(stageB);
+        });
+    } else {
+        cards.sort((a, b) => a.originalIndex - b.originalIndex);
+    }
+
     cards.forEach((card, index) => {
         const cardItem = document.createElement('div');
         cardItem.className = `card-item ${index === currentIndex ? 'selected' : ''} ${card.enabled ? '' : 'disabled'}`;
         cardItem.dataset.enabled = card.enabled;
+
+        // Add a colored bar to indicate the current learning stage if Anki mode is on
+        let learningStageBar = '';
+        if (ankiMode) {
+            const learningStage = getLearningStage(card.easeFactor);
+            const stageColor = getStageColor(learningStage);
+            learningStageBar = `<div class="learning-stage-bar" style="background-color: ${stageColor};"></div>`;
+        }
+
         cardItem.innerHTML = `
-            <div class="left-controls">
-                <label class="toggle-switch">
-                    <input type="checkbox" ${card.enabled ? 'checked' : ''}>
-                    <span class="slider"></span>
-                </label>
-                <button class="edit-button">Edit</button>
-            </div>
-            <div class="card-content">
-                <span>${card.side1} / ${card.side2}</span>
+            ${learningStageBar}
+            <div class="card-content-wrapper">
+                <div class="left-controls">
+                    <label class="toggle-switch">
+                        <input type="checkbox" ${card.enabled ? 'checked' : ''}>
+                        <span class="slider"></span>
+                    </label>
+                    <button class="edit-button">Edit</button>
+                </div>
+                <div class="card-content">
+                    <span>${card.side1} / ${card.side2}</span>
+                </div>
             </div>
         `;
-        
+
         const checkbox = cardItem.querySelector('input[type="checkbox"]');
         checkbox.addEventListener('change', (event) => {
             toggleCard(index);
@@ -108,6 +134,7 @@ function updateCardList(shouldScroll = true) {
 
         cardList.appendChild(cardItem);
     });
+
     if (shouldScroll) {
         scrollSelectedCardIntoView();
     }
@@ -197,5 +224,46 @@ async function saveDeckToFile(deckName, deckData) {
         ankiMode: ankiModeState
     };
     await window.electronAPI.writeDeck(deckName, dataToSave);
+    showSavingIndicator();
+}
+
+// Helper functions to determine learning stage and get corresponding color
+function getLearningStage(easeFactor) {
+    if (easeFactor < 1.5) {
+        return 'New';
+    } else if (easeFactor < 2.0) {
+        return 'Seen';
+    } else if (easeFactor < 2.5) {
+        return 'Learned';
+    } else {
+        return 'Mastered';
+    }
+}
+
+function getStageColor(stage) {
+    switch (stage) {
+        case 'New':
+            return '#FF0000'; // Red
+        case 'Seen':
+            return '#FFA500'; // Orange
+        case 'Learned':
+            return '#FFFF00'; // Yellow
+        case 'Mastered':
+            return '#00FF00'; // Green
+        default:
+            return '#FFFFFF'; // White
+    }
+}
+
+function getCurrentDeckData() {
+    return {
+        cards: cards,
+        ankiMode: ankiMode,
+        studyStep: studyStep
+    };
+}
+
+async function saveDeckToFile(deckName, deckData) {
+    await window.electronAPI.writeDeck(deckName, deckData);
     showSavingIndicator();
 }

@@ -31,6 +31,8 @@ function addEventListeners() {
     document.getElementById('anki-mode-toggle').addEventListener('change', async () => {
         ankiMode = document.getElementById('anki-mode-toggle').checked;
         updateControls();
+        updateCardList();
+
         await saveDeckToFile(currentDeckName, cards);
     });
     document.getElementById('again-button').addEventListener('click', again);

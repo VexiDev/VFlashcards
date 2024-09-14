@@ -18,20 +18,47 @@ async function loadDecks() {
 
 async function loadDeck(deckName) {
     currentDeckName = deckName;
-    const deckData = await window.electronAPI.readDeck(deckName);
-    cards = Array.isArray(deckData.cards) ? deckData.cards : [];
-    ankiMode = deckData.ankiMode || false; // Load ankiMode from the deck data
-    cards.forEach((card, index) => {
-        if (card.originalIndex === undefined) {
-            card.originalIndex = index;
-        }
-    });
+    let deckData = await window.electronAPI.readDeck(deckName);
+
+    // Check if the deck is a v1 deck (an array of cards)
+    if (Array.isArray(deckData)) {
+        deckData = {
+            cards: deckData,
+            ankiMode: false
+        };
+    }
+
+    // Ensure the deck has the expected structure
+    if (!deckData.cards) {
+        deckData.cards = [];
+    }
+    if (typeof deckData.ankiMode !== 'boolean') {
+        deckData.ankiMode = false;
+    }
+
+    // Ensure all cards have the necessary keys for SM2 learning
+    deckData.cards = deckData.cards.map((card, index) => ({
+        ...card,
+        originalIndex: card.originalIndex !== undefined ? card.originalIndex : index,
+        repetitions: card.repetitions !== undefined ? card.repetitions : 0,
+        interval: card.interval !== undefined ? card.interval : 1,
+        easeFactor: card.easeFactor !== undefined ? card.easeFactor : 2.5,
+        nextReview: card.nextReview !== undefined ? card.nextReview : index + 1
+    }));
+
+    // Save the updated deck structure back to the file
+    await window.electronAPI.writeDeck(deckName, deckData);
+
+    // Load the deck data into the application
+    cards = deckData.cards;
+    ankiMode = deckData.ankiMode;
+    studyStep = deckData.studyStep !== undefined ? deckData.studyStep : 0;
     currentIndex = 0;
     updateCardList();
     showCard();
     localStorage.setItem('lastUsedDeck', deckName);
     document.getElementById('current-deck-name').textContent = deckName;
-    
+
     // Update the manage decks modal if it's open
     const manageDecksModal = document.getElementById('manageDecksModal');
     if (manageDecksModal.style.display === 'block') {

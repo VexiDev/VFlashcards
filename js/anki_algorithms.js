@@ -1,8 +1,4 @@
-// js/anki_algorithms.js
-
-// SM-2 Algorithm
-function sm2Algorithm(card, grade) {
-    const now = Date.now();
+function sm2Algorithm(card, grade, studyStep) {
     if (grade >= 3) {
         if (card.repetitions === 0) {
             card.interval = 1;
@@ -18,7 +14,16 @@ function sm2Algorithm(card, grade) {
         card.interval = 1;
         card.easeFactor = Math.max(1.3, card.easeFactor - 0.2);
     }
-    card.nextReview = now + card.interval * 24 * 60 * 60 * 1000;
+    card.nextReview = studyStep + Math.round(card.interval);
+    return card;
+}
+
+function updateCardState(card, grade, algorithm, studyStep) {
+    if (algorithm === 'sm2') {
+        return sm2Algorithm(card, grade, studyStep);
+    } else if (algorithm === 'fsrs') {
+        return fsrsAlgorithm(card, grade);
+    }
     return card;
 }
 
@@ -26,15 +31,5 @@ function sm2Algorithm(card, grade) {
 function fsrsAlgorithm(card, grade) {
     // Implement FSRS logic here
     // This is a placeholder for the actual FSRS implementation
-    return card;
-}
-
-// Update card state based on the selected algorithm
-function updateCardState(card, grade, algorithm) {
-    if (algorithm === 'sm2') {
-        return sm2Algorithm(card, grade);
-    } else if (algorithm === 'fsrs') {
-        return fsrsAlgorithm(card, grade);
-    }
     return card;
 }
