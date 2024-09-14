@@ -34,10 +34,10 @@
 
 #anki-mode-container {
     position: absolute;
-    left: 100%; /* Position it just after the #bottom-controls */
+    left: 100%; 
     top: 50%;
     transform: translateY(-50%);
-    margin-left: 10px; /* Add 10px margin to the left of the anki-mode container */
+    margin-left: 10px; 
 }
 
 #anki-mode-control {

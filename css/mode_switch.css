@@ -44,13 +44,14 @@
     display: flex;
     align-items: center;
     height: auto; /* Adjust height as needed */
-    margin: 0; /* Adjust margin as needed */
+    margin-bottom: 5px;
 }
 
 .anki-mode-switch {
     display: flex;
     align-items: center;
     height: 100%;
+    cursor: pointer;
 }
 
 .anki-checkmark {

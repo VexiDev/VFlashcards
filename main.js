@@ -5,6 +5,7 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
+    title: 'VFlashcards',
     width: 800,
     height: 600,
     backgroundColor: '#121212',
@@ -15,7 +16,10 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js')
     },
     autoHideMenuBar: true,
-    icon: path.join(__dirname, 'icon.png')
+    icon: process.platform === 'darwin'
+      ? path.resolve(__dirname, 'icon.icns')
+      : path.resolve(__dirname, 'icon.png')
+
   });
 
   mainWindow.loadFile('index.html');
